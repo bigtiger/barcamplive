@@ -3,20 +3,29 @@
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta name="viewport" content="width=400; initial-scale=0.755; maximum-scale=1.0; minimum-scale=0.6666" />
-    <title>BarCampOrlando Schedule</title>
-    <%= stylesheet_link_tag 'application' %>
+    <title>BarCampJax Schedule</title>
+    <%= stylesheet_link_tag 'master' %>
   </head>
 
   <body>
-    <div id="page">
-      <div id="header">
-        <h1><%= link_to 'BarCampOrlando', root_path %></h1>
+    <div id="container">
+      <div id="top-navigation">
+          <li><%= link_to 'BarCampJax', 'http://barcampjax.com' %></li>
+          <li><%= link_to 'Twitter Search', 'http://search.twitter.com/search?q=BarCampJax+OR+%22BarCamp+Jax%22+OR+%23bcjax+OR+%23bcj2009' %></li>
+          <li><%= link_to 'Based on Source Code', 'http://github.com/tylerhunt/barcamplive/tree/master' %></li>
       </div>
 
-      <div id="navigation">
+      <div id="header">
+        <h1><%= link_to 'BarCamp', root_path %> <span><%= link_to 'Jacksonville', root_path %></span></h1>
+        <h1 id="date">Rocktober 18th 2009 @ 11am - ?</h1>
+      </div>
+
+      <p style="color: green;"><%= flash[:notice] %></p>
+
+      <div id="Barcamp-info">
         <ul>
           <% Venue.find(:all, :order => 'id').each do |venue| %>
-            <li><%= link_to_unless_current venue.name, venue_path(venue, :anchor => 'schedule') %></li>
+            <li class="room"><%= link_to venue.name, venue_talks_path(venue) %></li>
           <% end %>
 
           <% if session[:admin] %>
@@ -26,18 +35,8 @@
           <br class="clear" />
         </ul>
       </div>
-
-      <p style="color: green;"><%= flash[:notice] %></p>
-
       <%= yield  %>
 
-      <div id="footer">
-        <ul>
-          <li><%= link_to 'BacCamp Orlando', 'http://barcamporlando.org' %></li>
-          <li><%= link_to 'Twitter Search', 'http://search.twitter.com/search?q=BarCampOrlando+OR+%22BarCamp+Orlando%22+OR+%23bcorlando+OR+%23bco2009' %></li>
-          <li><%= link_to 'Source Code', 'http://github.com/tylerhunt/barcamplive/tree/master' %></li>
-        </ul>
-      </div>
     </div>
   </body>
 </html>

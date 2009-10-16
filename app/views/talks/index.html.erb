@@ -1,8 +1,4 @@
-<h2>Talks for <%= link_to @venue.name, edit_venue_path(@venue) %></h2>
-
-<p>
-  <%= link_to 'New Talk', new_venue_talk_path(@venue) %>
-</p>
+<div style="clear:both;height:20px"></div>
 
 <table id="talks">
   <tr>
@@ -19,7 +15,6 @@
       <td><%=h talk.speaker %></td>
       <td><%=h talk.topic %></td>
       <td><%= link_to 'Edit', edit_venue_talk_path(@venue, talk) %></td>
-      <td><%= link_to 'Destroy', [@venue, talk], :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>
